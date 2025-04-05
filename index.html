@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>رسائل باللون البنفسجي الداكن</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #4c3c93;
+      color: #fff;
+      font-family: 'Cairo', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+      text-align: center;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 20px;
+      opacity: 0;
+      transform: translateY(-30px);
+      animation: fadeInUp 1.5s ease-out forwards;
+    }
+
+    .message-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+      width: 80%;
+      max-width: 700px;
+      padding: 40px;
+      background-color: rgba(0, 0, 0, 0.8);
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      transform: translateY(100px);
+      animation: slideIn 1.5s ease-out forwards;
+    }
+
+    .message {
+      font-size: 1.6rem;
+      line-height: 1.6;
+      color: #ffffff;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1.5s ease-out forwards 0.5s;
+    }
+
+    .quote {
+      font-size: 1.4rem;
+      font-style: italic;
+      color: #d1b3ff;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1.5s ease-out forwards 2s;
+    }
+
+    .footer {
+      margin-top: 50px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #f1c40f;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1.5s ease-out forwards 3s;
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideIn {
+      0% {
+        transform: translateY(100px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .star {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      animation: twinkle 2s infinite ease-in-out;
+    }
+
+    @keyframes twinkle {
+      0% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.2);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      .message {
+        font-size: 1.4rem;
+      }
+
+      .quote {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="introMessage">أهلاً بيكي مايفن!</h1>
+
+  <div class="message-container" id="messagesContainer">
+    <div class="message" id="message1">أنا عارف إن مهما عملنا، مش هنقدر نفهم أو نحس بيكي زي ما إنتِ حاسة، ولكن مش قادر أواسيكي زي ما المفروض.</div>
+    <div class="message" id="message2">لكن إنتِ واحدة من الناس المميزين في المنصة دي. خلي عندك أمل وعزيمة، لأن اللي جاي هيبقى أحسن. مهما كان اللي فات صعب، دي الحياة: فرح وحزن، أمل وفقدان.</div>
+    <div class="quote" id="quoteMessage">بقلم: محمد وليد</div>
+  </div>
+
+  <script>
+    function createStars() {
+      for (let i = 0; i < 50; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        document.body.appendChild(star);
+        star.style.top = Math.random() * 100 + 'vh';
+        star.style.left = Math.random() * 100 + 'vw';
+        star.style.animationDuration = Math.random() * 3 + 1 + 's';
+        star.style.animationDelay = Math.random() * 3 + 's';
+      }
+    }
+
+    createStars();
+
+    gsap.fromTo("#introMessage", {
+      opacity: 0,
+      y: -30
+    }, {
+      duration: 1.5,
+      opacity: 1,
+      y: 0,
+      ease: "power2.out",
+      onComplete: () => {
+        setTimeout(() => {
+          gsap.to("#introMessage", {
+            opacity: 0,
+            duration: 1
+          });
+          gsap.fromTo("#message1", {
+            opacity: 0,
+            y: 30
+          }, {
+            duration: 1.5,
+            opacity: 1,
+            y: 0,
+            ease: "power2.out",
+            delay: 0.5,
+            onComplete: () => {
+              setTimeout(() => {
+                gsap.to("#message1", {
+                  opacity: 0,
+                  y: -30,
+                  duration: 1,
+                  delay: 2,
+                  onComplete: () => {
+                    gsap.fromTo("#message2", {
+                      opacity: 0,
+                      y: 30
+                    }, {
+                      duration: 1.5,
+                      opacity: 1,
+                      y: 0,
+                      ease: "power2.out",
+                      delay: 0.5,
+                      onComplete: () => {
+                        setTimeout(() => {
+                          gsap.to("#message2", {
+                            opacity: 0,
+                            y: -30,
+                            duration: 1,
+                            delay: 2,
+                            onComplete: () => {
+                              gsap.fromTo("#quoteMessage", {
+                                opacity: 0,
+                                y: 30
+                              }, {
+                                duration: 1.5,
+                                opacity: 1,
+                                y: 0,
+                                ease: "power2.out",
+                                delay: 0.5,
+                                onComplete: () => {
+                                  setTimeout(() => {
+                                    gsap.to("#quoteMessage", {
+                                      opacity: 0,
+                                      y: -30,
+                                      duration: 1
+                                    });
+                                  }, 2000);
+                                }
+                              });
+                            }
+                          });
+                        }, 2000);
+                      }
+                    });
+                  }
+                });
+              }, 2000);
+            }
+          });
+        }, 1000);
+      }
+    });
+
+    document.addEventListener('contextmenu', function(event) {
+      event.preventDefault();
+      alert("تم تعطيل النقر بزر الماوس الأيمن.");
+    });
+
+    const password = "0maiven0123";
+    const userPassword = prompt("أدخل كلمة المرور لعرض الرسالة:");
+
+    if (userPassword !== password) {
+      alert("كلمة المرور غير صحيحة!");
+      document.body.innerHTML = "<h1>خطأ في كلمة المرور</h1>";
+    } else {
+      document.getElementById("messagesContainer").style.display = "block";
+    }
+  </script>
+</body>
+</html>
